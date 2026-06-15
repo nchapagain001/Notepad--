@@ -1,0 +1,10 @@
+<Project>
+
+  <PropertyGroup>
+    <!-- Centralize all build output under <repo>\out\ via the .NET 8 artifacts layout:
+         out\bin\<Project>\<config>, out\obj\<Project>\<config>, out\publish\<Project>\<config>. -->
+    <UseArtifactsOutput>true</UseArtifactsOutput>
+    <ArtifactsPath>$(MSBuildThisFileDirectory)out</ArtifactsPath>
+  </PropertyGroup>
+
+</Project>

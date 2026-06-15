@@ -1,0 +1,166 @@
+<UserControl x:Class="NotepadMinus.Views.FindBar"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             Focusable="False"
+             Width="400">
+    <UserControl.Resources>
+        <Style x:Key="FindIconToggle" TargetType="ToggleButton">
+            <Setter Property="Width" Value="26"/>
+            <Setter Property="Height" Value="24"/>
+            <Setter Property="Margin" Value="2,0,0,0"/>
+            <Setter Property="Padding" Value="0"/>
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="BorderBrush" Value="{DynamicResource SubtleBorder}"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="Foreground" Value="{DynamicResource ChromeForeground}"/>
+            <Setter Property="FontSize" Value="11"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="ToggleButton">
+                        <Border x:Name="Bd" CornerRadius="4"
+                                Background="{TemplateBinding Background}"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsChecked" Value="True">
+                                <Setter TargetName="Bd" Property="Background" Value="{DynamicResource SidebarHover}"/>
+                            </Trigger>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="Bd" Property="Background" Value="{DynamicResource SidebarHover}"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style x:Key="FindIconButton" TargetType="Button">
+            <Setter Property="Width" Value="26"/>
+            <Setter Property="Height" Value="24"/>
+            <Setter Property="Margin" Value="2,0,0,0"/>
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="BorderBrush" Value="{DynamicResource SubtleBorder}"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="Foreground" Value="{DynamicResource ChromeForeground}"/>
+            <Setter Property="FontSize" Value="12"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border x:Name="Bd" CornerRadius="4"
+                                Background="{TemplateBinding Background}"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="Bd" Property="Background" Value="{DynamicResource SidebarHover}"/>
+                            </Trigger>
+                            <Trigger Property="IsEnabled" Value="False">
+                                <Setter Property="Opacity" Value="0.4"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </UserControl.Resources>
+
+    <Border x:Name="Shell"
+            CornerRadius="8"
+            Background="{DynamicResource ChromeBackground}"
+            BorderBrush="{DynamicResource SubtleBorder}"
+            BorderThickness="1"
+            Padding="10,8">
+        <Border.Effect>
+            <DropShadowEffect BlurRadius="14" ShadowDepth="2" Direction="270" Opacity="0.18" Color="Black"/>
+        </Border.Effect>
+        <StackPanel Orientation="Vertical">
+            <StackPanel Orientation="Horizontal">
+                <ToggleButton x:Name="ReplaceToggle" Style="{StaticResource FindIconToggle}"
+                              ToolTip="Toggle Replace" Content="›"
+                              Margin="0,0,4,0"
+                              Checked="ReplaceToggle_Changed" Unchecked="ReplaceToggle_Changed"/>
+                <Border x:Name="QueryBorder"
+                        CornerRadius="4"
+                        BorderBrush="{DynamicResource SubtleBorder}"
+                        BorderThickness="1"
+                        Background="{DynamicResource EditorBackground}"
+                        Width="160" Height="24">
+                    <TextBox x:Name="QueryBox"
+                             BorderThickness="0"
+                             Background="Transparent"
+                             Foreground="{DynamicResource EditorForeground}"
+                             VerticalContentAlignment="Center"
+                             Padding="6,0"
+                             FontSize="12"
+                             KeyDown="QueryBox_KeyDown"
+                             TextChanged="QueryBox_TextChanged"/>
+                </Border>
+                <ToggleButton x:Name="MatchCaseToggle" Style="{StaticResource FindIconToggle}"
+                              ToolTip="Match Case (Alt+C)" Content="Aa"
+                              Checked="Modifier_Changed" Unchecked="Modifier_Changed"/>
+                <ToggleButton x:Name="WholeWordToggle" Style="{StaticResource FindIconToggle}"
+                              ToolTip="Match Whole Word (Alt+W)" Content="ab"
+                              Checked="Modifier_Changed" Unchecked="Modifier_Changed">
+                    <ToggleButton.ContentTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="ab" TextDecorations="Underline" FontSize="11"/>
+                        </DataTemplate>
+                    </ToggleButton.ContentTemplate>
+                </ToggleButton>
+                <ToggleButton x:Name="RegexToggle" Style="{StaticResource FindIconToggle}"
+                              ToolTip="Use Regular Expression (Alt+R)" Content=".*"
+                              Checked="Modifier_Changed" Unchecked="Modifier_Changed"/>
+                <Button x:Name="PrevButton" Style="{StaticResource FindIconButton}"
+                        ToolTip="Previous Match (Shift+Enter)" Content="↑"
+                        Click="PrevButton_Click" Margin="6,0,0,0"/>
+                <Button x:Name="NextButton" Style="{StaticResource FindIconButton}"
+                        ToolTip="Next Match (Enter)" Content="↓"
+                        Click="NextButton_Click"/>
+                <Button x:Name="CloseButton" Style="{StaticResource FindIconButton}"
+                        ToolTip="Close (Esc)" Content="✕"
+                        Click="CloseButton_Click" Margin="6,0,0,0"/>
+            </StackPanel>
+
+            <!-- Replace row, collapsed by default. -->
+            <StackPanel x:Name="ReplaceRow" Orientation="Horizontal" Margin="0,6,0,0" Visibility="Collapsed">
+                <!-- Spacer to align with the query input (chevron width + margin). -->
+                <Border Width="30" Background="Transparent"/>
+                <Border x:Name="ReplaceBorder"
+                        CornerRadius="4"
+                        BorderBrush="{DynamicResource SubtleBorder}"
+                        BorderThickness="1"
+                        Background="{DynamicResource EditorBackground}"
+                        Width="160" Height="24">
+                    <TextBox x:Name="ReplaceBox"
+                             BorderThickness="0"
+                             Background="Transparent"
+                             Foreground="{DynamicResource EditorForeground}"
+                             VerticalContentAlignment="Center"
+                             Padding="6,0"
+                             FontSize="12"
+                             KeyDown="ReplaceBox_KeyDown"
+                             TextChanged="ReplaceBox_TextChanged"/>
+                </Border>
+                <Button x:Name="ReplaceOneButton" Style="{StaticResource FindIconButton}"
+                        ToolTip="Replace (Enter)" Content="⇄"
+                        Margin="6,0,0,0"
+                        Click="ReplaceOneButton_Click"/>
+                <Button x:Name="ReplaceAllButton" Style="{StaticResource FindIconButton}"
+                        ToolTip="Replace All (Ctrl+Alt+Enter)" Content="⇶"
+                        Click="ReplaceAllButton_Click"/>
+            </StackPanel>
+
+            <TextBlock x:Name="CounterText"
+                       Margin="2,4,0,0"
+                       FontSize="11"
+                       Opacity="0.75"
+                       Foreground="{DynamicResource ChromeForeground}"
+                       Visibility="Collapsed"/>
+        </StackPanel>
+    </Border>
+</UserControl>

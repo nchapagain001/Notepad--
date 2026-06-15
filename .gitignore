@@ -1,0 +1,49 @@
+# Build output
+bin/
+obj/
+out/
+publish/
+
+# Visual Studio
+.vs/
+*.user
+*.suo
+*.userprefs
+*.userosscache
+*.sln.docstates
+
+# Rider / IntelliJ
+.idea/
+
+# VS Code (uncomment if not sharing settings)
+.vscode/
+
+# Test results
+TestResults/
+[Tt]est[Rr]esults/
+*.trx
+*.coverage
+*.coveragexml
+
+# NuGet
+*.nupkg
+*.snupkg
+.nuget/
+packages/
+project.lock.json
+project.fragment.lock.json
+
+# Logs / temp
+*.log
+*.tmp
+*.bak
+
+# OS
+Thumbs.db
+.DS_Store
+
+# Local-only app data
+session.json
+
+# Private notes/specs — never published
+private/

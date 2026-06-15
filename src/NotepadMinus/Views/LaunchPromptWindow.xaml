@@ -1,0 +1,42 @@
+<Window x:Class="NotepadMinus.Views.LaunchPromptWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="notepad--"
+        Width="460" Height="220"
+        WindowStartupLocation="CenterScreen"
+        ResizeMode="NoResize"
+        ShowInTaskbar="False"
+        Background="{DynamicResource ChromeBackground}"
+        Foreground="{DynamicResource ChromeForeground}"
+        FontFamily="Segoe UI">
+    <Grid Margin="24">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <StackPanel Grid.Row="0">
+            <TextBlock Text="notepad--" FontSize="18" FontWeight="SemiBold" Foreground="{DynamicResource ChromeForeground}"/>
+            <TextBlock Text="Good morning." Margin="0,8,0,0" Foreground="{DynamicResource ChromeForeground}" Opacity="0.7"/>
+        </StackPanel>
+
+        <Grid Grid.Row="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="16"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Button x:Name="StartFreshButton"
+                    Grid.Column="0"
+                    Content="Start Fresh"
+                    Height="40"
+                    Click="StartFreshButton_Click"/>
+            <Button x:Name="OpenYesterdayButton"
+                    Grid.Column="2"
+                    Content="Open Yesterday's"
+                    Height="40"
+                    Click="OpenYesterdayButton_Click"/>
+        </Grid>
+    </Grid>
+</Window>

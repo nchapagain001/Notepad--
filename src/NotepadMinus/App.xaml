@@ -1,0 +1,33 @@
+﻿<Application x:Class="NotepadMinus.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
+             xmlns:local="clr-namespace:NotepadMinus">
+    <Application.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ui:ThemesDictionary Theme="Light"/>
+                <ui:ControlsDictionary/>
+            </ResourceDictionary.MergedDictionaries>
+
+            <!-- ThemeService overwrites these at startup and every theme switch. -->
+            <SolidColorBrush x:Key="ChromeBackground" Color="#FFFFFFFF"/>
+            <SolidColorBrush x:Key="ChromeForeground" Color="#FF1F2937"/>
+            <SolidColorBrush x:Key="EditorBackground" Color="#FFFFFFFF"/>
+            <SolidColorBrush x:Key="EditorForeground" Color="#FF111827"/>
+            <SolidColorBrush x:Key="HeaderBandBackground" Color="#FFF1F4F8"/>
+            <SolidColorBrush x:Key="HeaderBandForeground" Color="#FF1F2A37"/>
+            <SolidColorBrush x:Key="SidebarBackground" Color="#FFFAFBFC"/>
+            <SolidColorBrush x:Key="SidebarHover" Color="#FFEFF2F6"/>
+            <SolidColorBrush x:Key="SidebarSelected" Color="#FFE2E8F0"/>
+            <SolidColorBrush x:Key="SubtleBorder" Color="#FFE5E7EB"/>
+            <SolidColorBrush x:Key="AccentBrush" Color="#FF2563EB"/>
+
+            <!-- Visual softness: rounded corners shared across the chrome. -->
+            <CornerRadius x:Key="ButtonCorner">6</CornerRadius>
+            <CornerRadius x:Key="TabCorner">8</CornerRadius>
+            <CornerRadius x:Key="CardCorner">8</CornerRadius>
+            <CornerRadius x:Key="DialogCorner">12</CornerRadius>
+        </ResourceDictionary>
+    </Application.Resources>
+</Application>

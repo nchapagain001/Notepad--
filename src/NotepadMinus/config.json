@@ -1,0 +1,21 @@
+{
+  "storage": {
+    "notesFolder": "%USERPROFILE%\\Documents\\NotepadMinus\\notes",
+    "archiveFolder": "%USERPROFILE%\\Documents\\NotepadMinus\\notes\\_archive"
+  },
+  "autosave": {
+    "intervalSeconds": 60
+  },
+  "startup": {
+    "promptOnLaunch": true,
+    "defaultChoice": "StartFresh"
+  },
+  "editor": {
+    "fontFamily": "Consolas",
+    "fontSize": 12,
+    "wordWrap": false,
+    "showLineNumber": true,
+    "font": "Mono",
+    "theme": "System"
+  }
+}
